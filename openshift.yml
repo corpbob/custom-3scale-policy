@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Template
 metadata:
   name: "custom-3scale-policy"
-message: "APIcast Example Policy"
+message: "APIcast Pass API Version in Header Policy"
 objects:
 
 - apiVersion: v1
@@ -24,7 +24,7 @@ objects:
     output:
       to:
         kind: ImageStreamTag
-        name: apicast-policy:example
+        name: apicast-policy:apiversionheader
     source:
       git:
         uri: https://github.com/corpbob/custom-3scale-policy.git
@@ -62,13 +62,13 @@ objects:
       images:
         - from:
             kind: ImageStreamTag
-            name: 'apicast-policy:example'
+            name: 'apicast-policy:apiversionheader'
           paths:
             # copy policy source code into the new image
             - destinationDir: policies
-              sourcePath: /opt/app-root/policies/example
+              sourcePath: /opt/app-root/policies/apiversionheader
             # copy also installed dependencies to the policy folder, so they are vendored
-            # - destinationDir: policies/example/0.1/resty/
+            # - destinationDir: policies/apiversionheader/0.1/resty/
             #   sourcePath: /opt/app-root/src/lua_modules/share/lua/5.1/resty/iputils.lua
       type: Dockerfile
       dockerfile: |
