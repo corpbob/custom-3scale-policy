@@ -1,1 +1,1 @@
-return require('example')
+return require('apiversionheader')
